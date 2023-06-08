@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>BAM Dashboard</title>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js""></script>
+</head>
+
+<body>
+    <canvas id="myChart" width="100" height="100"></canvas>
+    <script>
+        d3.csv("country.csv").then(makeChart);
+
+        function makeChart(players) {
+            var playerLabels = players.map(function (d) {
+                return d.country;
+            });
+            var weeksData = players.map(function (d) {
+                return d.population;
+            });
+
+            var chart = new Chart("myChart", {
+                type: "bar",
+                data: {
+                    labels: playerLabels,
+                    datasets: [
+                        {
+                            data: weeksData
+                        }
+                    ]
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>
